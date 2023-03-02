@@ -59,7 +59,7 @@
 	    <groupId>io.cucumber</groupId>
 	    <artifactId>cucumber-testng</artifactId>
 	    <version>7.11.1</version>
-	     
+	    <scope>test</scope>	     
 	</dependency>
 	
 	<dependency>
@@ -141,4 +141,8 @@
                  <version>1.0-beta</version>
           </dependency>
   </dependencies>
+   <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
 </project>

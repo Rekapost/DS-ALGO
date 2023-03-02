@@ -1,4 +1,5 @@
 package pages;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -7,8 +8,11 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.FindBy;
 //import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -68,7 +72,13 @@ public class registerPage
 	public String getEmptyfieldErrormsgConfrmPwd() {
 		return confirm_pwd.getAttribute("validationMessage");
 	}
-
+	public void screenShot() throws IOException {		
+		TakesScreenshot screenshot =( TakesScreenshot) driver; 
+		File sourceFile=screenshot.getScreenshotAs(OutputType.FILE);
+		File destinationFile = new File("C:\\Users\\Reka\\git\\DS-ALGO-94NN\\screenshot\\sample.png");  
+		//FileUtils.copyFile(sourceFile3, destinationFile3); 
+		FileHandler.copy(sourceFile, destinationFile);
+		}
 	/*
 	
 	public Boolean getEmptyRequiredUser() {

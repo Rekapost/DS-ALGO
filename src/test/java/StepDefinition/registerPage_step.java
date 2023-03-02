@@ -1,13 +1,9 @@
 package StepDefinition;
-
 import static org.testng.Assert.assertEquals;
-
 import java.io.IOException;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -40,13 +36,14 @@ public class registerPage_step {
 	}
 	
 	@When("The user  enters {string} with other fields empty and user clicks register button")
-	public void the_user_enters_with_other_fields_empty_and_user_clicks_register_button(String string, io.cucumber.datatable.DataTable dataTable) {
+	public void the_user_enters_with_other_fields_empty_and_user_clicks_register_button(String string, io.cucumber.datatable.DataTable dataTable) throws IOException {
 		rp.clickRegisterLink();
 		Loggerload.info("The user  enters username with other fields empty " );
 		rp.enterUsername(dataTable);
 		rp.clickSubmitRegister();	
 		String Page_Title=rp.getPageTitle();
 		Loggerload.info("Page Title : "+Page_Title ); 
+		rp.screenShot();
 		//assertEquals(Page_Title, "Login", "Title do not match");
 		
 //		String expectedmessage = dataTable.get(rownumber).get("username");
