@@ -1,6 +1,7 @@
 package StepDefinition;
 import static org.testng.Assert.assertEquals;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -11,6 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import constants.Constants;
+import org.openqa.selenium.TakesScreenshot;
+
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -27,18 +30,20 @@ public class Collections_step {
 	//WebDriver driver=new FirefoxDriver();
 	CollectionsPage collection=new CollectionsPage();
 	String Excelpath = ConfigReader.getexcelfilepath();
+	
 	static String expectedMesg;
 	
 	//******************************  Main page  ***************************************	
 	@Given("The user opens DS Algo portal link")
 	public void the_user_opens_ds_algo_portal_link() throws IOException {
+		
 		Loggerload.info("opening DS ALGO portal link"); 
 		//driver.get(URl);
 		collection.getPage();
 	}
 	
 	@When("user clicks {string} button")
-	public void user_clicks_button(String string) {
+	public void user_clicks_button(String string) throws InterruptedException {
 		collection.clickOngetStarted();
 	}
 	@Then("user should be redirected to the homepage and see {int} different collections")
@@ -83,30 +88,7 @@ public class Collections_step {
 		Loggerload.info("Page Title : "+Page_Title ); 
 		assertEquals(Page_Title, "Login", "Title do not match");
 		
-//		String expectedmessage = dataTable.get(rowNumber).get("email");
-//		String actualSuccMessg = CollectionsPage.getExpectedResult(expectedResult);
-//		Assert.assertEquals(actualSuccMessg, expSuccessMessage);
-		
-//	
-//		try {
-//			expectedmessage = CollectionsPage.getExpectedResult(expectedmessage, null);
-//		} catch (InvalidFormatException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		String actualSuccMessg = Page_Title;
-//		Assert.assertEquals(actualSuccMessg, expectedmessage);
-//		Loggerload.info(actualSuccMessg );
 	}
-	
-//	@Then("user click on register")
-//	public void user_click_on_register() {
-//		Loggerload.info("user click on register");
-//	  mp.clickonRegister();
-//	}
 
 	//******************************  Login  ***************************************
 	@Given("user launches login page")
@@ -119,7 +101,7 @@ public class Collections_step {
 	public void user_login_using_username_and_password_from_given_and(String sheetName, Integer rowNumber) throws IOException, InvalidFormatException, InterruptedException {
 		ExcelReader reader = new ExcelReader();
 		Loggerload.info("User enter login credentials ");
-		List<Map<String, String>> testData=reader.getData("C:/Users/Reka/Desktop/NumpyNinja/DS ALGO/LoginDsAlgo.xlsx", 0);
+		List<Map<String, String>> testData=reader.getData("src/test/resources/Exceldata/LoginDsAlgo.xlsx", 0);
 		String User_name=testData.get(rowNumber).get("username");  // heading 
 		String Pass_word=testData.get(rowNumber).get("password");  // heading 
 		collection.loginWithCredentials(User_name, Pass_word);
@@ -127,12 +109,7 @@ public class Collections_step {
 		String Title = collection.login_page();
 		Loggerload.info("Title of current page is : " + Title);
 		
-//		assertEquals(Title, "Login", "Title do not match");
-//		String expectedmessage = dataTable.get(rowNumber).get("email");
-//		String actualSuccMessg = contactUsPage.getSuccessMessg();
-//		Assert.assertEquals(actualSuccMessg, expSuccessMessage);
-		}
-	
+	}	
 	//******************************  Data Structure  ***************************************
 	
 	 // COMMON WHEN RUNNING INDIVIDUALLY FOR ARRAY, LINKED LIST , QUEUE, GRAPH , TREE, STACK 
@@ -166,13 +143,7 @@ public class Collections_step {
 		assertEquals(actualSuccMessg, expectedMesg," Results do not match");
 	}
 	
-//	@Then("user enters <code> and click run , code is printed")
-//	public void user_enters_code_and_click_run_code_is_printed(DataTable Code)
-//	{	
-//		List<List<String>>data=Code.cells();
-//		signIn.enterCode(data.get(0).get(0));
-//	}
-	
+ 	
 	@Then("user navigate to homepage")
 	public void user_navigate_to_homepage() throws IOException 
 	{
@@ -180,6 +151,9 @@ public class Collections_step {
 	} 
 	
 	//******************************  Array  ***************************************
+	
+	
+	
 	@Given("user clicks {string}  in Array field")
 	public void user_clicks_in_array_field(String string) throws IOException {
 		
@@ -201,6 +175,7 @@ public class Collections_step {
 		String actualSuccMessg = CollectionsPage.getActualResult();
 		Loggerload.info("Actual result: "+actualSuccMessg );
 		assertEquals(actualSuccMessg, expectedMesg," Results do not match");
+//		collection.CollectionscreenShot("Sample2.png");
 	}
 	
 	@Given("user is in Array homepage")
@@ -238,16 +213,17 @@ public class Collections_step {
 
 	@When("user enters valid Python Code")
 	//public void user_enters_valid_python_code(io.cucumber.datatable.DataTable dataTable) {	
-	public void user_enters_valid_python_code(DataTable Pythoncode ) throws InvalidFormatException, IOException {
+	public void user_enters_valid_python_code(DataTable Pythoncode ) throws InvalidFormatException, IOException, InterruptedException {
 		List<List<String>> data = Pythoncode.cells();
-		collection.arrayPracticeQuestion(data.get(0).get(0));
-		
+		collection.arrayPracticeQuestion(data.get(0).get(0));		
 	}	
+	
 	@When("user clicks run button and captures output")
-	public void user_clicks_run_button_and_captures_output() throws IOException {
+	public void user_clicks_run_button_and_captures_output() throws Exception {
 //	   	String output = collection.getActualResult();
 //		Loggerload.info("The output is:" + output);
 		collection.clickRun();
+//		collection.ScreenShot();
 		String actualSuccMessg = CollectionsPage.getActualResult();
 		Loggerload.info("Actual result: "+actualSuccMessg );
 //		driver.navigate().back();
@@ -255,8 +231,9 @@ public class Collections_step {
 //		collection.clickSearchTheArray();
 //		collection.clearCodeInTextEditorBox();
 	}
+	
 	@When("user enters invalid Python Code")
-	public void user_enters_invalid_python_code(DataTable Pythoncode) throws InvalidFormatException, IOException {
+	public void user_enters_invalid_python_code(DataTable Pythoncode) throws InvalidFormatException, IOException, InterruptedException {
 		List<List<String>> data = Pythoncode.cells();
 		collection.arrayPracticeQuestion(data.get(0).get(0));
 	}
@@ -275,8 +252,9 @@ public class Collections_step {
 		collection.clickMaxConsecutiveOnes();	
 		collection.clearCodeInTextEditorBox();
 	}	
+	
 	@When("user enters Python Code {string}")
-	public void user_enters_python_code(String code) throws InvalidFormatException, IOException {
+	public void user_enters_python_code(String code) throws InvalidFormatException, IOException, InterruptedException {
 //	@When("user enters Python Code print\\(Max Consecutive Ones)")
 //	public void user_enters_python_code_print_max_consecutive_ones(String code) throws InvalidFormatException, IOException {
 		collection.arrayPracticeQuestion(code);		
@@ -285,8 +263,7 @@ public class Collections_step {
 	@When("user clicks run button and captures output and error message if any")
 	public void user_clicks_run_button_and_captures_output_and_error_message_if_any() throws InterruptedException, IOException {
 //		String output = collection.getActualResult();
-//		Loggerload.info("The output is:" + output);
-						
+//		Loggerload.info("The output is:" + output);						
 		try{
 		Loggerload.info("User gets the error message in an Alert  ");
 		String fetchError = collection.getErrorText();
@@ -295,66 +272,41 @@ public class Collections_step {
 		assertEquals(fetchError,ExpectedError,"Invalid Syntax error message");
 		}
 		catch(NoSuchElementException e){			   
-		   }
-		
+		   }		
 		//driver.navigate().back();
 		collection.clickPracticeQuestionArray();
 		//Loggerload.info("Invalid code is taken and clicked on run button");
 		//assertEquals(actualMsg,"NameError: name 'hello' is not defined on line 1", "Result do not match");
-	} 
-	
-	
-	//##############  Array Practice Page #############
-	
-//		@When("User is in Array Practice homepage")
-//		public void user_is_in_array_practice_homepage() throws IOException {
-//			collection.clickArraysInPython();
-//			collection.clickPracticeQuestions();
-//		}
-//
-//		@When("User clicks {string} first link in the Array Practice list")
-//		public void user_clicks_first_link_in_the_array_practice_list(String string) {
-//			collection.clicksearchTheArray();
-//		}
-//
-//		@When("user clears the text and enter python code")
-//		public void user_clears_the_text_and_enter_python_code() {
-//		   collection.clearCodeInTextEditor();
-//		}
-//		
-//		@Then("user enters Python Code {string} from config")
-//		public void user_enters_python_code_from_config(String string) throws IOException, InterruptedException {
-//			collection.pythonCode(string );
-//		}
-//		
-//		@When("User clicks {string} second link in the Array Practice list")
-//		public void user_clicks_second_link_in_the_array_practice_list(String string) {
-//		   collection.MaxconsecutiveOnes();
-//		}
-//
-//		@Then("user gets the error message")
-//		public void user_gets_the_error_message() throws InterruptedException {
-//		    collection.getErrorText();
-//		}	
-//
-//	    @When("User clicks {string} third link in the Array Practice list")
-//	     public void user_clicks_third_link_in_the_array_practice_list(String string) {
-//	    	collection.clickFindNumbersWithEvenNumberOfDigits();
-//	      }
-//
-//	    @Then("user enters Python code")
-//	     public void user_enters_python_code(io.cucumber.datatable.DataTable dataTable) throws IOException {
-//	              List<List<String>> data = dataTable.cells();
-//	              collection.pythonCode(data.get(0).get(0));
-//	     }
-//
-//	    @When("User clicks {string} fourth link in the Array Practice list")
-//	    public void user_clicks_fourth_link_in_the_array_practice_list(String string) {
-//	           collection.clickSquaresOfASortedArray();
-//	    }
-	
-//************************&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&	
-	//*************************** Linked List *************************************
+		} 
+		
+	@When("user click  {string} 3rd Practice questions")
+	public void user_click_3rd_practice_questions(String string) {
+
+			collection.clickfindNumbersWithEvenNumberOfDigits();	
+			collection.clearCodeInTextEditorBox();					
+		}
+		
+
+		@When("user click on {string}  Practice questions four")
+		public void user_click_on_practice_questions_four(String string) {		  
+			collection.squaresOfASortedArray();	
+			collection.clearCodeInTextEditorBox();			
+		}
+		
+		@When("user enters valid python Code {string} from config")
+		public void user_enters_valid_python_code_from_config(String string) throws IOException, InterruptedException {
+			collection.pythonCode(string );			  	
+		}
+		
+
+     @Then("user enters invalid python Code {string} from config")
+     public void user_enters_invalid_python_code_from_config(String string) throws IOException, InterruptedException {
+	collection.errorCode(string);	
+			  
+		}
+		
+		
+ 	//*************************** Linked List *************************************
 	
 	@Given("user clicks {string}  in Linked List field")
 	public void user_clicks_in_linked_list_field(String string) {
@@ -374,7 +326,7 @@ public class Collections_step {
 		collection.clickLinkedList();
 	}
 	@When("user click {string} second link  in the Linked list")
-	public void user_click_second_link_in_the_linked_list(String string) {
+	public void user_click_second_link_in_the_linked_list(String string) throws InterruptedException {
 	    collection.clickcreatingLinkedList();
 	}
 	@When("user click {string} third link in the Linked list")
@@ -401,7 +353,7 @@ public class Collections_step {
 	//*************************** Stack *************************************
 
 	@Given("user clicks {string}  in Stack field")
-	public void user_clicks_in_stack_field(String string) {
+	public void user_clicks_in_stack_field(String string) throws InterruptedException {
 	    try {
 			collection.clickStack();
 		} catch (IOException e) {
@@ -414,7 +366,7 @@ public class Collections_step {
 	   collection.clickOperationInStack();
 	}
 	@Given("user is in Stack homepage")
-	public void user_is_in_stack_homepage() throws IOException {
+	public void user_is_in_stack_homepage() throws IOException, InterruptedException {
 		collection.clickStack();
 	}
 	@When("user click {string} second link  in the Stack")
@@ -430,7 +382,7 @@ public class Collections_step {
 	//*************************** Queue *************************************
 	
 	@Given("user clicks {string}  in Queue field")
-	public void user_clicks_in_queue_field(String string) {
+	public void user_clicks_in_queue_field(String string) throws InterruptedException {
 		try {
 			collection.clickQueue();
 		} catch (IOException e) {
@@ -442,7 +394,7 @@ public class Collections_step {
 		collection.clickImplementationOfQueueInPython();
 	}
 	@Given("user is in Queue homepage")
-	public void user_is_in_queue_homepage() throws IOException {
+	public void user_is_in_queue_homepage() throws IOException, InterruptedException {
 		collection.clickQueue();
 	}
 	@When("user click {string} second link  in the Queue")
@@ -477,7 +429,7 @@ public class Collections_step {
 	    collection.clickGraph();
 	}
 	@Given("user is in Graph homepage")
-	public void user_is_in_graph_homepage() throws IOException {
+	public void user_is_in_graph_homepage() throws IOException, InterruptedException {
 		collection.clickGraphPage();
 		
 	}
@@ -489,7 +441,7 @@ public class Collections_step {
 	//*************************** Tree *************************************
 	
 	@Given("user clicks {string}  in Tree field")
-	public void user_clicks_in_tree_field(String string) {
+	public void user_clicks_in_tree_field(String string) throws InterruptedException {
 	    try {
 			collection.clickTree();
 		} catch (IOException e) {
@@ -503,7 +455,7 @@ public class Collections_step {
 	}
 
 	@Given("user is in Tree homepage")
-	public void user_is_in_tree_homepage() throws IOException {
+	public void user_is_in_tree_homepage() throws IOException, InterruptedException {
 		collection.clickTree();
 	}
 	@When("user click {string} 2nd link in the Tree")

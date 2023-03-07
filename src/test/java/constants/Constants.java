@@ -8,6 +8,8 @@ public class Constants {
 	public static String user_name;
 	public static String pass_word;
 	public static String python_Code;
+//	public static String python_Code1;
+	public static String error_Code;
 //	public static String CHROME_DRIVER="webdriver.chrome.driver";
 //	public static String FIREFOX_DRIVER="webdriver.firefox.driver";
 }

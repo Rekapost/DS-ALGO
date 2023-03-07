@@ -22,7 +22,7 @@ Feature: DS Algo ArrayPractice Page
   @arrayPractice
    Scenario: User navigate to Array Practice Page and works in Search the array
    Given user login with username "Numphysdet94NN" and password "sdet94batchNN" given through config
-   Given User clicks "Get started" in array
+   Given user clicks "Get started"  in Array field 
    When User is in Array Practice homepage 
    When User clicks "Search the array" first link in the Array Practice list
    And  user clears the text and enter python code 
@@ -30,29 +30,29 @@ Feature: DS Algo ArrayPractice Page
    
   Scenario: User navigate to Array Practice Page and works in Max Consecutive Ones
    #Given user login with username "Numphysdet94NN" and password "sdet94batchNN" given through config
-   Given User clicks "Get started" in array
+   Given user clicks "Get started"  in Array field 
    When User is in Array Practice homepage 
    When User clicks "Max Consecutive Ones" second link in the Array Practice list
    And  user clears the text and enter python code 
-   Then user enters Python code"print(Hello);" from config 
+   Then user enters Python Code1 "print(Hello);" from config 
    Then user gets the error message
   
   Scenario: User navigate to Array Practice Page and works in Find Numbers with Even Number of Digits
    #Given user login with username "Numphysdet94NN" and password "sdet94batchNN" given through config
-   Given User clicks "Get started" in array
+   Given user clicks "Get started"  in Array field 
    When User is in Array Practice homepage 
    When User clicks "Find Numbers with Even Number of Digits" third link in the Array Practice list
    And  user clears the text and enter python code 
-   Then user enters Python code
+   Then user enters python code
          | print("Find Numbers with Even Number of Digits")|
    
    Scenario: User navigate to Array Practice Page and works in Squares of  a Sorted Array
    #Given user login with username "Numphysdet94NN" and password "sdet94batchNN" given through config
-   Given User clicks "Get started" in array
+   Given user clicks "Get started"  in Array field 
    When User is in Array Practice homepage 
    When User clicks "Squares of  a Sorted Array" fourth link in the Array Practice list
    And  user clears the text and enter python code 
-   Then user enters Python code
+   Then user enters python code
          | Squares of  a Sorted Array       |
          | print(Squares of  a Sorted Array)|
    Then user gets the error message

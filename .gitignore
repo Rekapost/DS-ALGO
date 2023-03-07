@@ -1,2 +1,6 @@
 /target/
 /bin/
+/ExtentReports/
+/allure-results/
+/logs/
+/test-output/

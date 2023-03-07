@@ -30,7 +30,7 @@ public class ElementsUtils {
 
 	public String getCodefromExcel(int sheetNumber, int rownumber) throws InvalidFormatException, IOException {
 		ExcelReader reader = new ExcelReader();
-		List<Map<String, String>> testdata = reader.getData("C:/Users/Reka/Desktop/NumpyNinja/DS ALGO/LoginDsAlgo.xlsx",1);
+		List<Map<String, String>> testdata = reader.getData("src/test/resources/Exceldata/LoginDsAlgo.xlsx",1);
 		code = testdata.get(rownumber).get("python_Code");
 		//result = testdata.get(rownumber).get("Result");
 		return code;
