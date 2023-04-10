@@ -17,7 +17,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
  *DONE EXCEPTION HANDLING 
  *RAN THE CODE USING JUNIT and TESTNG
  *USED CONFIG.PROPERTIES FILE,CONFIG READER, EXCEL READER, CONSTANTS, LOG4J, HOOKS,CROSS BROWSER
- *GENERATED EXTENT PDF REPORT , EXTENT SPARK HTML REPORT AND CUCUMBER HTML REPORT    */
+ *GENERATED EXTENT PDF REPORT ,Allure Report,  EXTENT SPARK HTML REPORT AND CUCUMBER HTML REPORT    */
 //	@RunWith(Cucumber.class)    //***************  junit
 //	@CucumberOptions(           //***************  junit
       @CucumberOptions(            //***************  testng
@@ -48,5 +48,4 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 		public Object[][] scenarios() {
 			return super.scenarios();
 		}
-
 }

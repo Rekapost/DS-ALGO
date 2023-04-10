@@ -61,10 +61,32 @@ Scenario Outline: user does Arrays Using List
     And user clears the text
     When user enters Python Code "<PythonCode>"
     And user clicks run button and captures output and error message if any
-    Then user navigate to homepage     
+        
     Examples:
      	|PythonCode|
         | print(Max Consecutive Ones)|
+    @arrayPractice
+   Scenario: User navigate to Array Practice Page and works in Find Numbers with Even Number of Digits
+   #Given user login with username "Numphysdet94NN" and password "sdet94batchNN" given through config
+   #Given User clicks "Get started" in array
+   #When User is in Array Practice homepage 
+   When user click  "Find Numbers with Even Number of Digits" 3rd Practice questions 
+   And  user clears the text 
+   When user enters valid Python Code "pythonCode" from config 
+   Then user clicks run button and captures output
+   
+   
+  Scenario: User navigate to Array Practice Page and works in Squares of  a Sorted Array
+   #Given user login with username "Numphysdet94NN" and password "sdet94batchNN" given through config
+   #Given User clicks "Get started" in array
+   #When User is in Array Practice homepage 
+   When user click on "Squares of  a Sorted Array"  Practice questions four
+   And  user clears the text  
+   Then user enters invalid Python Code "errorcode" from config 
+   And user clicks run button and captures output and error message if any
+   Then user navigate to homepage    
+   
+  
 	 
 	
 	  

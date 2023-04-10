@@ -1,5 +1,7 @@
 package pages;
+import java.io.File;
 import java.io.FileInputStream;
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,8 +15,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import constants.Constants;
@@ -70,6 +75,11 @@ public class CollectionsPage {
 	@FindBy (xpath="//button[contains(text(),'Run')]")WebElement runButtoninPracticeQuestions;
 	//pre[@id='output']
 	@FindBy (xpath="//textarea[@id='editor']")WebElement enterPythontextArea;
+
+	@FindBy(xpath="//a[contains(text(),'Find Numbers with Even Number of Digits')]")WebElement findNumbersWithEvenNumberOfDigits;
+	@FindBy(xpath="//a[contains(text(),'Squares of  a Sorted Array')]") WebElement squaresOfASortedArray;
+//    @FindBy(xpath = "/html/body/div[4]/a")WebElement findNumbersWithEvenNumberOfDigits;
+//    @FindBy(xpath = "/html/body/div[5]/a") WebElement squaresOfASortedArray;
   //******************************** Linked List *****************************************
 	@FindBy (xpath="//a[contains(@href,'linked-list')]")WebElement LinkedListLink;
 	@FindBy (xpath="//a[contains(text(),'Introduction')]")WebElement introduction;
@@ -110,13 +120,36 @@ public class CollectionsPage {
 	@FindBy (xpath="//a[contains(text(),'Binary Search Trees')]")WebElement binarySearchTrees ;
 	@FindBy (xpath="//a[contains(text(),'Implementation Of BST')]")WebElement implementationOfBST;
 	@FindBy (id="output")
-	static WebElement output; 
+	static WebElement output;
+	@FindBy (xpath="IMAGE_PATH") WebElement imageScreenshot;
+	String fileName;
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 	public CollectionsPage()
 	{
 		PageFactory.initElements(driver, this);
 		//this.driver=driver;
 	}	
+	
+	public void CollectionscreenShot(String fileName) throws IOException {    
+        TakesScreenshot screenshot =( TakesScreenshot) driver; 
+        File sourceFile=screenshot.getScreenshotAs(OutputType.FILE);
+        File destinationFile = new File("C:\\Users\\Reka\\git\\DS-ALGO-94NN\\screenshot\\"+fileName);
+        FileHandler.copy(sourceFile, destinationFile);
+        }
+	
+	public void imgaeScreenShot() throws Exception{
+        WebElement oneImage = imageScreenshot;
+        File sourceFile = oneImage.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(sourceFile, new File("C:\\Users\\Reka\\git\\DS-ALGO-94NN\\screenshot\\screenshot.png"));
+    }
+	
+	public void sampleScreenShot() throws IOException {
+	TakesScreenshot screenshot3 =( TakesScreenshot) driver; 
+	File sourceFile3=screenshot3.getScreenshotAs(OutputType.FILE);
+	File destinationFile3 = new File("C:\\Users\\Reka\\git\\DS-ALGO-94NN\\screenshot\\samplescreenshot.png");  
+	//FileUtils.copyFile(sourceFile3, destinationFile3); 
+	FileHandler.copy(sourceFile3, destinationFile3);
+	}
 	
 //******************************  Main Page  ***************************************	
 	public void getPage() throws IOException
@@ -286,6 +319,37 @@ public class CollectionsPage {
 		eleUtil.WaitForElement(output);
 		return output.getText();
 	}
+	
+	public void clickfindNumbersWithEvenNumberOfDigits()
+	{
+	findNumbersWithEvenNumberOfDigits.click();
+	}
+
+	public void squaresOfASortedArray()
+	{
+	squaresOfASortedArray.click();
+	}
+
+	
+	public void pythonCode(String string) throws IOException {
+		FileInputStream stream = new FileInputStream(propertyFilePath);
+		properties = new Properties();
+		properties.load(stream);
+		Constants.python_Code=properties.getProperty("pythonCode");
+        driver.findElement(enterPythonText).sendKeys(Constants.python_Code);
+        //runButtoninPracticeQuestions.click();      
+       }
+
+		
+	public void errorCode(String PythonCode) throws IOException {
+		FileInputStream stream = new FileInputStream(propertyFilePath);
+		properties = new Properties();		
+		properties.load(stream);
+		Constants.error_Code=properties.getProperty("errorcode");
+        driver.findElement(enterPythonText).sendKeys(Constants.error_Code);
+        runButtoninPracticeQuestions.click();      
+       }
+	
 	
 	public static String getErrorText() throws InterruptedException {
 	Thread.sleep(1000);

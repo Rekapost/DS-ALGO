@@ -35,6 +35,8 @@ public class driverFactory {
 			Loggerload.info("Testing on chrome");
 			//System.setProperty("webdriver.chrome.driver", driverLocation);
 			WebDriverManager.chromedriver().setup();
+			//WebDriverManager.chromedriver().clearDriverCache();
+	        //WebDriverManager.chromedriver().clearResolutionCache();
 			//WebDriverManager.chromedriver().browserVersion("110.0.0").setup();
 			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
@@ -42,12 +44,14 @@ public class driverFactory {
 			chromeOptions.setScriptTimeout(Duration.ofSeconds(30));
 			chromeOptions.setPageLoadTimeout(Duration.ofMillis(30000));
 			chromeOptions.setImplicitWaitTimeout(Duration.ofSeconds(20));
+			chromeOptions.addArguments("--remote-allow-origins=*");	  
 			driver =new ChromeDriver(chromeOptions);
 			
 			//WebDriverManager.chromedriver().browserVersion("108.0.0").setup();
 			//System.setProperty("webdriver.chrome.driver", driverLocation);
 			
 		}
+		
 		else if(browser.equalsIgnoreCase("firefox")){
 			Loggerload.info("Testing on firefox");
 			WebDriverManager.firefoxdriver().setup();
@@ -78,6 +82,10 @@ public class driverFactory {
 
 	public static WebDriver getdriver() {
 		return driver;
+		
+//		getDriver(String url) Attempts to locate a driver that understands the given URL. 
+//		static Enumeration<Driver> getDrivers() Retrieves an 
+//		Enumeration with all of the currently loaded JDBC drivers to which the current caller has access.
 	}
 
 }

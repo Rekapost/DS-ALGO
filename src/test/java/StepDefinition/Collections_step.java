@@ -4,13 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.formula.functions.Code;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.PageFactory;
-import constants.Constants;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,7 +14,6 @@ import pages.CollectionsPage;
 import utilities.ConfigReader;
 import utilities.ExcelReader;
 import utilities.Loggerload;
-import utilities.ReadExcelNOTUSED;
 
 public class Collections_step {
 	 WebDriver driver;
@@ -302,6 +296,30 @@ public class Collections_step {
 		//Loggerload.info("Invalid code is taken and clicked on run button");
 		//assertEquals(actualMsg,"NameError: name 'hello' is not defined on line 1", "Result do not match");
 	} 
+
+	@When("user click  {string} 3rd Practice questions")
+	public void user_click_3rd_practice_questions(String string) {
+		collection.clickfindNumbersWithEvenNumberOfDigits();	
+		collection.clearCodeInTextEditorBox();					
+	}
+	
+
+	@When("user click on {string}  Practice questions four")
+	public void user_click_on_practice_questions_four(String string) {		  
+		collection.squaresOfASortedArray();	
+		collection.clearCodeInTextEditorBox();			
+	}
+	
+	@When("user enters valid Python Code {string} from config")
+	public void user_enters_valid_python_code_from_config(String string) throws IOException {
+		  collection.pythonCode(string );			  	
+	}
+	
+	@When("user enters invalid Python Code {string} from config")
+	public void user_enters_invalid_python_code_from_config(String string) throws Exception {
+		  collection.errorCode(string);	
+		  //collection.sampleScreenShot();
+	}
 	
 //************************&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&	
 	//*************************** Linked List *************************************

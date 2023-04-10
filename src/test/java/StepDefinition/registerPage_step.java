@@ -17,7 +17,7 @@ public class registerPage_step {
 	//String url = "https://dsportalapp.herokuapp.com/register";
 	
 	registerPage rp=new registerPage();
-
+//
 	@Given("The user opens Register Page")
 	public void the_user_opens_register_page() throws IOException {
 		rp.getRegisterPage();

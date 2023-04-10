@@ -45,10 +45,10 @@ public class Hooks {
 	public void scenario(Scenario scenario) {
 		Loggerload.info("===============================================================================================");
 		Loggerload.info(scenario.getSourceTagNames() +" : "+scenario.getName());
-		Loggerload.info("-----------------------------------------------------------------------------------------------");
-		
+		Loggerload.info("-----------------------------------------------------------------------------------------------");		
 	}
 
+	
 	@AfterStep
 	public void afterstep(Scenario scenario) {
 		if (scenario.isFailed()) {

@@ -3,11 +3,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Sheet;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -37,7 +33,7 @@ public class registerPage
 	public registerPage()
 	{
 		PageFactory.initElements(driver, this);
-		//this.driver=driver;
+		//this.driver=driver;   
 	}	
 
 	public void getRegisterPage() throws IOException {
